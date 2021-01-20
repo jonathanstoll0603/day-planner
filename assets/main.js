@@ -72,9 +72,25 @@ function checkTime() {
 }
 checkTime() //Calls checkTime function
 
-// Button click event for the save button
-$(".saveBtn").on("click", function() {
+function storedTodos() {
+    localStorage.setItem("todoArray", JSON.stringify(todoArray));
+}
 
+var todoArray = [];
+// Button click event for the save button
+$(".saveBtn").on("submit", function(event) {
+    event.preventDefault();
+    // stores the values of the user's text area input 
+    var todoText = textAreaInput.value.trim();
+
+    if (todoText === '') {
+        return;
+    }
+
+    todoArray.push(todoText);
+    textAreaInput.val("");
+
+    storedTodos();
 })
 
 })    
