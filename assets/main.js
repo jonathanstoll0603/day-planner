@@ -6,13 +6,16 @@ var nowFormatted = dayjs().format("MMM DD YYYY");
 var currentTimeHeader = dayjs().format("h:mm A") // returns header clock time in XX:XX AM/PM
 var currentTime = dayjs().format("h:mm"); // returns current time in XX:XX 
 
+var currentTimeHour = dayjs().format("h"); // Turns current time to number
+console.log(currentTime)
+console.log(currentTimeHour)
 console.log(dayjs())
 
 var workdayHoursArray = ['9 AM', '10 AM', '11 AM', '12 PM', '1 PM', '2 PM', '3 PM', '4 PM', '5 PM']; // Array containing all the hours in workday. Used to create the number of rows and display time.
-// 
+var workdayHoursMilitary = [9, 10, 11, 12, 13, 14, 15, 16, 17]; // array containing workday in military time to compare in the checkTime function
+
 $("#currentDay").text(currentTimeHeader + " on: " + nowFormatted); // currentDay div text
 
-//
 
 function createTable() {
     
@@ -20,10 +23,12 @@ function createTable() {
 
     // repeat this function for a total of 8 times (num hours in workday)
     for (var i = 0; i < workdayHoursArray.length; i++) {
+
         // Each row's div container
         var divRow = $("<div>").addClass("row time-block").appendTo(container);
         // Adding ID attribute to each row to parse the int in the checkTime func
-        divRow.attr("id", [i + 8])
+        divRow.attr("id", (workdayHoursMilitary[i]))
+        console.log(divRow.attr("id"))
 
         // Hour count div on left hand side of row
         var timeDiv = $("<div>").addClass("col-md-1 hour").appendTo(divRow); 
@@ -48,16 +53,16 @@ function checkTime() {
     // Checks each time-block div 
     $(".time-block").each(function() {
         // variable to parse the int of the time block ID
-        var timeParse = parseInt($(this).attr("id"));
+        var timeParse = Number($(this).attr("id"));
 
         // If rows times are in the future
-        if (timeParse > currentTime) {
+        if (timeParse > currentTimeHour) {
             $(this).removeClass("past");
             $(this).removeClass("present");
             $(this).addClass("future");
 
         // If current time equals the row time
-        } else if (timeParse == currentTime) {
+        } else if (timeParse === workdayHoursMilitary) {
             $(this).removeClass("past");
             $(this).removeClass("future");
             $(this).addClass("present");
@@ -72,25 +77,22 @@ function checkTime() {
 }
 checkTime() //Calls checkTime function
 
-function storedTodos() {
-    localStorage.setItem("todoArray", JSON.stringify(todoArray));
-}
-
-var todoArray = [];
 // Button click event for the save button
-$(".saveBtn").on("submit", function(event) {
+$(".saveBtn").on("click", function(event) {
     event.preventDefault();
-    // stores the values of the user's text area input 
-    var todoText = textAreaInput.value.trim();
+
+    // stores the values of the user's text area input into variable
+    var todoText = $(this).siblings(".description").val();
+    var todoTime = $(this).parent().attr("id");
 
     if (todoText === '') {
         return;
     }
 
-    todoArray.push(todoText);
-    textAreaInput.val("");
-
-    storedTodos();
+    localStorage.setItem(todoText, todoTime);
+    console.log(todoText, todoTime);
 })
+
+$("#9 .description").val(localStorage.getItem("9"));
 
 })    
