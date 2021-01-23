@@ -16,10 +16,6 @@ var workdayHoursMilitaryTimeArray = [9, 10, 11, 12, 13, 14, 15, 16, 17]
  // currentDay div text
 $("#currentDay").text(currentTimeHeader + " on: " + nowFormatted);
 
-// arrays containing saved user information to be called for local storage storage.
-var todoTextArr = [];
-var todoTimeArr = [];
-
 // Function that dynamically creates the html content and attributes
 function createTable() {
     
@@ -111,11 +107,6 @@ $(".saveBtn").on("click", function(event) {
     // stores the values of the user's text area input and it's ID into variables 
     var todoText = $(this).siblings(".description").val();
     var todoTime = $(this).siblings(".description").attr("id");
-
-    // if there is no text entered when user saves, do nothing.
-    if (todoText === '') {
-        return;
-    }
 
     // Stores todoTime as the key, todoText as the value
     localStorage.setItem(todoTime, todoText)
