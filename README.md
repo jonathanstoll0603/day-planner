@@ -14,16 +14,22 @@ The application can be used as a powerful tool to help visualize one's schedules
 
 ![Finished Website](./assets/images/day-planner-example.png)
 
+
+![gif of finished website](./assets/images/day-planner-gif.gif)
+
 ## Links
 
 [Live URL](https://www.jonathanstoll0603.github.io/day-planner/)
 
 [Github URL](https://github.com/jonathanstoll0603/day-planner)
 
-## Credits
+[LinkedIn](https://www.linkedin.com/in/jonathan-stoll-092351133/)
 
-[day.js](https://day.js.org/en/)
 
-[stackoverflow](https://stackoverflow.com/)
+## Contact Information
+Name: Jonathan Stoll
+Email: Jonathanstoll0603@gmail.com
+Phone: (678)-358-4384
 
-[w3schools](https://www.w3schools.com/jsref/prop_win_localstorage.asp)
+## License
+MIT License
